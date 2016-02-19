@@ -11,10 +11,10 @@ var App = React.createClass({
 
   createTable: function() {
     var info = {
-      table: $('#TableInput').val();
-      un: $('#UsernameOfDatabase').val();
-      pw: $('#PasswordOfDatabase').val();
-      cols: $('#numberOfColumns').val();
+      table: $('#TableInput').val(),
+      un: $('#UsernameOfDatabase').val(),
+      pw: $('#PasswordOfDatabase').val(),
+      cols: $('#numberOfColumns').val()
     }
     info = JSON.stringify(info);
     $.ajax({
