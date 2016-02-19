@@ -19,6 +19,7 @@
   "homepage": "https://github.com/CarolAG/Making-SQL-SXY#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "nodemon": "^1.8.1"
+    "nodemon": "^1.8.1",
+    "start": "^4.0.1"
   }
 }
