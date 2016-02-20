@@ -31,17 +31,13 @@ app.post('/login', function(req, res,next){
   userController.verify(req,res,next);
   app.use(cookieParser());
 
-  cookieController.setSSIDCookie(req,res,next);
-  app.use(cookieParser());
+cookieController.setSSIDCookie(req,res,next);
+app.use(cookieParser());
 
-  sessionController.isLoggedIn(req,res,next);
+sessionController.isLoggedIn(req,res,next);
 });
 app.get('/loggedin', function(req, res){
   res.sendFile(path.join(__dirname + '/../client/loggedin.html') );
-});
-
-app.listen(5432, function(){
-  console.log('Listening on port 5432!');
 });
 
 //Signup Post page
