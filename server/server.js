@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 
-// order of process for user 
+// order of process for user
 // userController --> cookieController --> sessionController --> features
 var userController = require('./user/userController');
 var cookieController = require('./cookie/cookieController');
@@ -27,6 +27,7 @@ app.post('/login', function(req, res,next){
   sessionController.isLoggedIn(req,res,next);
 });
 
+
 //Signup Post page
 app.get('/signup', userController.createUser);
 
@@ -37,7 +38,10 @@ app.get('/permission', function(req, res){
   res.send('hello world');
 });
 
+app.get('/loggedin', function(req, res){
+  res.sendFile('/../client/index.html');
+});
+app.listen(5432, function(){
+  console.log('Listening on port 5432!');
 
-app.listen(1080, function(){
-  console.log('Listening on port 3000!');
 });
