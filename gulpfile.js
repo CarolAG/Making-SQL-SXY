@@ -40,7 +40,7 @@ function buildScript(file, watch) {
     var updateStart = Date.now();
     rebundle();
     console.log('Updated!', (Date.now() - updateStart) + 'ms');
-  })
+  });
 
   // run it once the first time buildScript is called
   return rebundle();
@@ -57,7 +57,7 @@ gulp.task('start', function() {
     script: 'server/server.js',
     ext: 'js html',
     env: {'NODE_ENV': 'development'}
-  })
+  });
 });
 
 // run 'scripts' task first, then watch for future changes
