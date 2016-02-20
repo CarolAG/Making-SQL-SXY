@@ -4,7 +4,15 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+<<<<<<< HEAD
 var schema = require('./user/postgresSchema')
+=======
+var mongoose = require('mongoose');
+
+//connect to DB
+var mongoURI = 'mongodb://localhost/sqlsexy';
+mongoose.connect(mongoURI);
+>>>>>>> ecbbb4ce4b1f915e7999a3866621199cac27f4f8
 
 app.use(express.static(path.join(__dirname, './../client')));
 
@@ -21,21 +29,37 @@ app.get('/', function(req, res){
 
 //adds body to the request which will store username input and password input
 app.use(bodyParser.urlencoded({ extended: true }));
+<<<<<<< HEAD
 app.use(bodyParser.json())
+=======
 
-//Signup Post page
-app.get('/signup', userController.createUser);
+//Signup Requests
+app.get('/signup', function(req,res){
+  res.sendFile(path.join(__dirname + './../client/signup.html'));
+});
+app.post('/signup', function(req,res){
+  userController.createUser(req,res);
+  res.sendFile(path.join(__dirname + './../client/index.html'));
+});
+>>>>>>> ecbbb4ce4b1f915e7999a3866621199cac27f4f8
 
-//Default Login Post Page
+//Default Login Requests
 app.post('/login', function(req, res){
+<<<<<<< HEAD
   cookieController.setSSIDCookie(req,res);
   sessionController.isLoggedIn(req,res);
   userController.verify(req,res);
+=======
+  userController.verify(req,res);
+  // cookieController.setSSIDCookie(req,res);
+  // sessionController.isLoggedIn(req,res);
+>>>>>>> ecbbb4ce4b1f915e7999a3866621199cac27f4f8
 });
+
 
 //Authorized user page
 app.get('/permission', function(req, res){
-  //add session and cooker checker before sending to app
+  //add session and cookie checker before sending to app
   res.sendFile(path.join(__dirname + './../client/loggedin.html'));
 });
 

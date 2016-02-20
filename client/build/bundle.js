@@ -881,6 +881,7 @@ var i,
 	// General-purpose constants
 	MAX_NEGATIVE = 1 << 31,
 
+
 	// Instance methods
 	hasOwn = ({}).hasOwnProperty,
 	arr = [],
@@ -900,6 +901,21 @@ var i,
 		}
 		return -1;
 	},
+
+module.exports = performanceNow;
+},{"./performance":25}],27:[function(require,module,exports){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule shallowEqual
+ * @typechecks
+ *
+ */
 
 	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
 
@@ -28956,7 +28972,7 @@ module.exports = performanceNow;
  *
  * @providesModule shallowEqual
  * @typechecks
- * 
+ *
  */
 
 'use strict';
@@ -29080,6 +29096,8 @@ var emptyFunction = require('./emptyFunction');
  * paths. Removing the logging code for production environments will keep the
  * same logic and follow the same code paths.
  */
+},{"./lib/React":55}],161:[function(require,module,exports){
+// shim for using process in browser
 
 var warning = emptyFunction;
 
