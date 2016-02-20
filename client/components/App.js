@@ -6,16 +6,25 @@ var $ = require('jquery');
 var App = React.createClass({
 
   getInitialState: function() {
-    return {columns: 0, table: '', un: '', pw: ''}
+    return {columns: 0, table: '', un: '', pw: '', colnames: []}
   },
 
   createTable: function() {
-    console.log(this.state)
+    var cols = [];
+    var types = [];
+    for(var i = 0; i < this.state.columns; i++) {
+      var hold1 = '#colnames' + i.toString();
+      var hold2 = '#coltype' + i.toString();
+      cols.push($(hold1).val());
+      types.push($(hold2).val());
+    }
     var info = {
       table: this.state.table,
       un: this.state.un,
       pw: this.state.pw,
-      cols: this.state.columns
+      colNum: this.state.columns,
+      colnames: cols,
+      colTypes: types
     }
     info = JSON.stringify(info);
     $.ajax({
@@ -25,6 +34,7 @@ var App = React.createClass({
       contentType: 'application/json; charset=UTF-8',
       dataType: 'json'
     })
+
   },
 
   thing: function(e) {

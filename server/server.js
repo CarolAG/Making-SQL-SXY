@@ -21,6 +21,7 @@ app.get('/', function(req, res){
 //adds body to the request which will store username input and password input
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 //Signup Post page
 app.get('/signup', userController.createUser);
 
