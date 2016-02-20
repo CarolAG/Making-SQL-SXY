@@ -7,11 +7,9 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
-<<<<<<< HEAD
-app.use(express.static(path.join(__dirname, './../client')));
-=======
 
->>>>>>> de78c2f7c355ea57db37b1a696c709bc39c0a096
+app.use(express.static(path.join(__dirname, './../client')));
+
 // order of process for user
 // userController --> cookieController --> sessionController --> features
 var userController = require('./user/userController');
