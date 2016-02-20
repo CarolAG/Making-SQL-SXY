@@ -6,19 +6,20 @@ var $ = require('jquery');
 var App = React.createClass({
 
   getInitialState: function() {
-    return {columns: 0}
+    return {columns: 0, table: '', un: '', pw: ''}
   },
 
   createTable: function() {
+    console.log(this.state)
     var info = {
-      table: $('#TableInput').val(),
-      un: $('#UsernameOfDatabase').val(),
-      pw: $('#PasswordOfDatabase').val(),
-      cols: $('#numberOfColumns').val()
+      table: this.state.table,
+      un: this.state.un,
+      pw: this.state.pw,
+      cols: this.state.columns
     }
     info = JSON.stringify(info);
     $.ajax({
-      type:POST,
+      type:'POST',
       url: '/loggedin',
       data: info,
       contentType: 'application/json; charset=UTF-8',
@@ -26,16 +27,15 @@ var App = React.createClass({
     })
   },
 
-  onSubmit: function(e) {
+  thing: function(e) {
     e.preventDefault();
-    console.log(document.getElementById('numberOfColumns').value)
-    this.setState({columns: 3})
+    this.setState({columns: $('#numberOfColumns').val(), table: $('#TableInput').val(), un: $('#UsernameOfDatabase').val(), pw: $('#PasswordOfDatabase').val()});
   },
 
   render: function () {
     return (
       <div id='App' >
-        <TableInput makeForm={this.onSubmit} state={this.state} create='createTable'/>
+        <TableInput makeForm={this.thing} state={this.state} create={this.createTable}/>
       </div>
     )
   }
