@@ -1,4 +1,4 @@
-// var User = require('./userModel');
+var User = require('./userModel');
 var path = require('path');
 // var bcrypt = require('bcrypt');
 var client = path.join(__dirname, '..', '..', 'client');
@@ -20,6 +20,16 @@ userController.createUser = function(req, res,next){
   }
   //save username and password into database section
 
+  var newUser = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
+
+    // newUser.save(function(err, result) {
+    //   if (err) return res.render(path.join(client, 'signup'), {error: "Username is taken"});
+    //   res.redirect('/permission');
+    // });
+
 };
 
 //user will be verified upon attempted login
@@ -30,7 +40,7 @@ userController.verify = function(req,res,next){
   }
 
   if(req.body.username === test.username && req.body.password===test.password){
-    
+
   }
   else{
     res.redirect('/signup');
