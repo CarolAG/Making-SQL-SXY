@@ -6,10 +6,11 @@ var $ = require('jquery');
 var App = React.createClass({
 
   getInitialState: function() {
-    return {columns: 0, table: '', un: '', pw: '', colnames: []}
+    return {columns: 0, table: '', un: '', pw: '', string: ''}
   },
 
-  createTable: function() {
+  createTable: function(e) {
+    e.preventDefault();
     var cols = [];
     var types = [];
     for(var i = 0; i < this.state.columns; i++) {
@@ -32,20 +33,31 @@ var App = React.createClass({
       url: '/loggedin',
       data: info,
       contentType: 'application/json; charset=UTF-8',
-      dataType: 'json'
+      dataType: 'json',
+      success: function(data) {
+        console.log(data.string)
+        // App.string = data;
+        this.setState({columns: this.state.columns, table: this.state.table, un:this.state.un, pw:this.state.pw, string: data.string})
+      }.bind(this)
     })
+    console.log(this.state)
+    alert('hi')
 
   },
+
+  string: '',
 
   thing: function(e) {
     e.preventDefault();
     this.setState({columns: $('#numberOfColumns').val(), table: $('#TableInput').val(), un: $('#UsernameOfDatabase').val(), pw: $('#PasswordOfDatabase').val()});
+    this.sendInfoToForm
   },
 
   render: function () {
+
     return (
       <div id='App' >
-        <TableInput makeForm={this.thing} state={this.state} create={this.createTable}/>
+        <TableInput makeForm={this.thing} state={this.state} string={this.string} create={this.createTable}/>
       </div>
     )
   }
