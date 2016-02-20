@@ -40,6 +40,7 @@ app.get('/loggedin', function(req, res){
   res.sendFile(path.join(__dirname + '/../client/loggedin.html') );
 });
 
+
 //Signup Post page
 app.get('/signup', userController.createUser);
 

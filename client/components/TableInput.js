@@ -18,9 +18,9 @@ var TableInput = React.createClass({
       var newForm = [];
       for(var i = 0; i < this.props.state.columns; i++) {
         newForm.push(
-          <div key={i} className='colnames'>
-            <input placeholder='Column Name'></input>
-            <select>
+          <div key={i} className='colnamesdiv'>
+            <input id={'colnames'+i} placeholder='Column Name'></input>
+            <select id={'coltype'+i}>
               <option>string</option>
               <option>number</option>
             </select>
