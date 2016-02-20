@@ -2,9 +2,10 @@ var express = require ('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 
-// order of process for user 
+// order of process for user
 // userController --> cookieController --> sessionController --> features
 var userController = require('./user/userController');
 var cookieController = require('./cookie/cookieController');
@@ -18,14 +19,21 @@ app.get('/', function(req, res){
 
 //adds body to the request which will store username input and password input
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cookieParser());
 
 //Default Login Post Page
 app.post('/login', function(req, res,next){
   userController.verify(req,res,next);
+  app.use(cookieParser());
+
   cookieController.setSSIDCookie(req,res,next);
+  app.use(cookieParser());
+
   sessionController.isLoggedIn(req,res,next);
 });
+
+app.use(cookieParser());
+
 
 //Signup Post page
 app.get('/signup', userController.createUser);
@@ -36,7 +44,6 @@ app.get('/signup', userController.createUser);
 app.get('/permission', function(req, res){
   res.send('hello world');
 });
-
 
 app.listen(1080, function(){
   console.log('Listening on port 3000!');

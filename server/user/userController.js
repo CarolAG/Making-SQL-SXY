@@ -3,7 +3,11 @@ var path = require('path');
 // var bcrypt = require('bcrypt');
 var client = path.join(__dirname, '..', '..', 'client');
 
-
+//test user
+var test = {
+  username: 'an',
+  password: 'test'
+};
 
 //store user name and password's input field in object
 var userController = {};
@@ -15,7 +19,6 @@ userController.createUser = function(req, res,next){
     res.sendFile(path.join(__dirname + './../../client/signup.html'), {error: "Must include username and password"});
   }
 
-  next();
 
 };
 
@@ -25,7 +28,11 @@ userController.verify = function(req,res,next){
     res.sendFile(path.join(__dirname + './../../client/signup.html'), {error: "Must include username and password"});
   }
 
-  next();
+  if(req.body.username === test.username && req.body.password){
+    res.redirect("./permission");
+  }
+
+  res.redirect('./signup');
 
 };
 
