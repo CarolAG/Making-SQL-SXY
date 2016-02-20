@@ -17,25 +17,26 @@ var TableInput = React.createClass({
     if(this.props.state.columns !== 0) {
       var newForm = [];
       for(var i = 0; i < this.props.state.columns; i++) {
-        newForm.push(<div>
-          <input placeholder='Column Name'></input>
-          <select>
-          <option>string</option>
-          <option>number</option>
-          </select>
-          </div>);
+        newForm.push(
+          <div key={i} className='colnames'>
+            <input placeholder='Column Name'></input>
+            <select>
+              <option>string</option>
+              <option>number</option>
+            </select>
+            <br/>
+          </div>
+
+        );
       }
       return (
-        <div>
         <form id='createSchema' onSubmit={this.props.create}>
           {newForm}
-          <button type='submit'></button>
+          <button type='submit'>Create Table</button>
         </form>
-        </div>
       )
     } else {
       return (
-        <div>
         <form id='makeNewForm' onSubmit={this.props.makeForm}>
           <input id='TableInput' placeholder='Table Name'></input><br/>
           <input id='UsernameOfDatabase' placeholder='UsernameOfDatabase'></input><br/>
@@ -49,7 +50,6 @@ var TableInput = React.createClass({
           </select><br/>
           <button type='submit'>Make columns</button>
         </form>
-        </div>
       )
     }
   }
