@@ -4,6 +4,11 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
+
+//connect to DB
+var mongoURI = 'mongodb://localhost/sqlsexy';
+mongoose.connect(mongoURI);
 
 app.use(express.static(path.join(__dirname, './../client')));
 
@@ -21,20 +26,26 @@ app.get('/', function(req, res){
 //adds body to the request which will store username input and password input
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Signup Requests
+app.get('/signup', function(req,res){
+  res.sendFile(path.join(__dirname + './../client/signup.html'));
+});
+app.post('/signup', function(req,res){
+  userController.createUser(req,res);
+  res.sendFile(path.join(__dirname + './../client/index.html'));
+});
 
-//Signup Post page
-app.get('/signup', userController.createUser);
-
-//Default Login Post Page
+//Default Login Requests
 app.post('/login', function(req, res){
   userController.verify(req,res);
-  cookieController.setSSIDCookie(req,res);
-  sessionController.isLoggedIn(req,res);
+  // cookieController.setSSIDCookie(req,res);
+  // sessionController.isLoggedIn(req,res);
 });
+
 
 //Authorized user page
 app.get('/permission', function(req, res){
-  //add session and cooker checker before sending to app
+  //add session and cookie checker before sending to app
   res.sendFile(path.join(__dirname + './../client/loggedin.html'));
 });
 

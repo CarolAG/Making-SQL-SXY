@@ -1290,7 +1290,7 @@ module.exports = performanceNow;
  *
  * @providesModule shallowEqual
  * @typechecks
- *
+ * 
  */
 
 'use strict';
@@ -29011,8 +29011,6 @@ module.exports = validateDOMNesting;
 'use strict';
 
 module.exports = require('./lib/React');
-
-
 
 },{"./lib/React":55}],161:[function(require,module,exports){
 // shim for using process in browser
