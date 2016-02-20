@@ -18,22 +18,23 @@ userController.createUser = function(req, res,next){
   if(!req.body.username || !req.body.password){
     res.sendFile(path.join(__dirname + './../../client/signup.html'), {error: "Must include username and password"});
   }
-
+  //save username and password into database section
 
 };
 
 //user will be verified upon attempted login
 userController.verify = function(req,res,next){
+  // if input fields are undefined, do nothing
   if(!req.body.username || !req.body.password){
     res.sendFile(path.join(__dirname + './../../client/signup.html'), {error: "Must include username and password"});
   }
 
-  if(req.body.username === test.username && req.body.password){
-    res.redirect("./permission");
+  if(req.body.username === test.username && req.body.password===test.password){
+    
   }
-
-  res.redirect('./signup');
-
+  else{
+    res.redirect('/signup');
+  }
 };
 
 
