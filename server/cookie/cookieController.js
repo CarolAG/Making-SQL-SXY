@@ -1,5 +1,5 @@
 var cookieController = {};
-var jwt = require('jsonwebtoken');
+// var jwt = require('jsonwebtoken');
 
 var cert = 'key';
 

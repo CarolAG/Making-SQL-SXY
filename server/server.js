@@ -4,6 +4,8 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+
+var schema = require('./user/postgresSchema')
 var mongoose = require('mongoose');
 
 //connect to DB
@@ -25,6 +27,7 @@ app.get('/', function(req, res){
 
 //adds body to the request which will store username input and password input
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 
 //Signup Requests
 app.get('/signup', function(req,res){
@@ -37,9 +40,9 @@ app.post('/signup', function(req,res){
 
 //Default Login Requests
 app.post('/login', function(req, res){
+  cookieController.setSSIDCookie(req,res);
+  sessionController.isLoggedIn(req,res);
   userController.verify(req,res);
-  // cookieController.setSSIDCookie(req,res);
-  // sessionController.isLoggedIn(req,res);
 });
 
 
@@ -55,7 +58,11 @@ app.get('/logout',function(req,res){
   res.sendFile(path.join(__dirname + './../client/index.html'));
 });
 
-
+app.post('/loggedin',function(req,res){
+  console.log(req.body)
+  schema(req,res)
+  }
+)
 app.listen(3000, function(){
   console.log('Listening on port 3000!');
 });

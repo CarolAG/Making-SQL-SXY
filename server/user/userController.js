@@ -36,7 +36,7 @@ userController.createUser = function(req, res,next){
 userController.verify = function(req,res,next){
   // if input fields are undefined, do nothing
   if(!req.body.username || !req.body.password){
-    res.sendFile(path.join(__dirname + './../../client/index.html'), {error: "Must include username and password"});
+    return res.sendFile(path.join(__dirname + './../../client/index.html'), {error: "Must include username and password"});
   }
 
 
